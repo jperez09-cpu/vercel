@@ -10,6 +10,16 @@
       "source": "/login.php",
       "destination": "/login",
       "permanent": false
+    },
+    {
+      "source": "/index.php",
+      "destination": "/index",
+      "permanent": false
+    },
+    {
+      "source": "/privacidad.php",
+      "destination": "/privacidad",
+      "permanent": false
     }
   ],
   "rewrites": [

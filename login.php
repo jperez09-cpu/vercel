@@ -41,7 +41,7 @@ if ($requestMethod === 'POST') {
                 $_SESSION['rol'] = $usuario['rol'];
                 $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
-                header('Location: /index.php');
+                header('Location: /index');
                 exit;
             }
         }
@@ -121,7 +121,7 @@ if ($requestMethod === 'POST') {
   <footer class="text-center mt-4">
     <p style="font-size: 0.85rem; color: #666;">
         &copy; 2026 Sistema de Gestion Interna - J.A.S <br>
-        <a href="privacidad.php" style="color: #0d6efd; text-decoration: none;">Politica de Privacidad</a>
+        <a href="/privacidad" style="color: #0d6efd; text-decoration: none;">Politica de Privacidad</a>
     </p>
   </footer>
 <script>
