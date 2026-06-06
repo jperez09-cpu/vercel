@@ -22,10 +22,6 @@
       "destination": "/sw.js"
     },
     {
-      "source": "/entrar.html",
-      "destination": "/entrar.html"
-    },
-    {
       "source": "/manifest.json",
       "destination": "/manifest.json"
     },

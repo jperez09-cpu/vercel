@@ -14,11 +14,6 @@ if (isset($_GET['limpiar_cookies']) && $_GET['limpiar_cookies'] === '1') {
     borrarCookiesViejasSesion();
 }
 
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: entrar.html');
-    exit;
-}
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     require_once 'conexion.php';
 
