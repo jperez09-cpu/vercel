@@ -2,7 +2,7 @@
 
 if (!defined('DIA_D_ADMIN_PASSWORD')) {
     // Cambia esta clave por una propia antes de publicar en produccion.
-    define('DIA_D_ADMIN_PASSWORD', 'CambiarDiaD2026');
+    define('DIA_D_ADMIN_PASSWORD', 'DiaD2026');
 }
 
 function diaDAdminTieneAcceso(): bool
