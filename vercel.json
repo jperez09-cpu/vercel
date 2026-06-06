@@ -137,6 +137,11 @@
       "permanent": false
     },
     {
+      "source": "/control_dia_d_concejal5.php",
+      "destination": "/control_dia_d_concejal5",
+      "permanent": false
+    },
+    {
       "source": "/inicializar_dia_d.php",
       "destination": "/inicializar_dia_d",
       "permanent": false
