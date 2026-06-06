@@ -9,12 +9,13 @@ header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
 header('Pragma: no-cache');
 
 $error = '';
+$requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 
 if (isset($_GET['limpiar_cookies']) && $_GET['limpiar_cookies'] === '1') {
     borrarCookiesViejasSesion();
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($requestMethod === 'POST') {
     require_once 'conexion.php';
 
     $nombre_usuario = trim($_POST['nombre_usuario'] ?? '');
@@ -40,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['rol'] = $usuario['rol'];
                 $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? '';
 
-                header('Location: index.php');
+                header('Location: /index.php');
                 exit;
             }
         }
@@ -92,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-  <form action="login.php" method="POST" class="login-container" novalidate autocomplete="off">
+  <form action="/login.php" method="POST" class="login-container" novalidate autocomplete="off">
     <div class="text-center mb-4">
         <h2 class="h4 mb-1">J. Augusto Saldivar</h2>
         <p class="text-muted">Administracion de Contactos Barriales</p>
