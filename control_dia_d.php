@@ -1140,7 +1140,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!selectUsuario) return;
 
         selectUsuario.innerHTML = '<option value="">Cargando...</option>';
-        fetch(`ajax_usuarios_por_concejal.php?id_concejal=${idConcejal}`)
+        fetch(`ajax_usuarios_por_concejal?id_concejal=${idConcejal}`)
             .then(resp => resp.json())
             .then(data => {
                 selectUsuario.innerHTML = '<option value="">-- Todos --</option>';

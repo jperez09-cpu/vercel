@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header('Location: index.php');
+    header('Location: index');
     exit;
 }
 ?>
@@ -49,7 +49,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
 
     <div class="container">
         <h2 class="text-center">👤 Crear Usuario</h2>
-        <form action="crear_usuario_proceso.php" method="POST">
+        <form action="crear_usuario_proceso" method="POST">
             <div class="mb-3">
                 <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
                 <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario" required />
@@ -67,7 +67,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
             </div>
             <div class="d-grid gap-2 d-md-flex justify-content-md-between mt-4">
                 <button type="submit" class="btn btn-primary">✅ Crear Usuario</button>
-                <a href="index.php" class="btn btn-secondary">🏠 Volver</a>
+                <a href="index" class="btn btn-secondary">🏠 Volver</a>
             </div>
         </form>
     </div>

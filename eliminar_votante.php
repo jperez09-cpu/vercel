@@ -6,7 +6,7 @@ require_once 'conexion.php';
 if (!isset($_SESSION['usuario']) ||
     !in_array($_SESSION['rol'], ['admin', 'concejal'])
 ) {
-    header('Location: index.php');
+    header('Location: index');
     exit;
 }
 
@@ -21,16 +21,16 @@ if (isset($_GET['id'])) {
 
     if ($stmt->execute()) {
         // Redirigir con mensaje de éxito
-        header('Location: consultar_votantes.php?msg=eliminado');
+        header('Location: consultar_votantes?msg=eliminado');
         exit;
     } else {
         // Redirigir con mensaje de error
-        header('Location: consultar_votantes.php?msg=error');
+        header('Location: consultar_votantes?msg=error');
         exit;
     }
 } else {
     // Si no hay id, vuelve a la lista
-    header('Location: consultar_votantes.php');
+    header('Location: consultar_votantes');
     exit;
 }
 ?>

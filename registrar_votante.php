@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 
     if ($count > 0) {
-        header("Location: registrar.php?error=cedula_existente");
+        header("Location: registrar?error=cedula_existente");
         exit;
     }
 
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($result_usuario->num_rows === 0) {
         echo "<script>
             alert('Error: El usuario no tiene concejal asignado.');
-            window.location.href='registrar.php';
+            window.location.href='registrar';
         </script>";
         exit;
     }
@@ -87,13 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     if ($stmt_insert->execute()) {
-        header("Location: registrar.php?success=1");
+        header("Location: registrar?success=1");
     } else {
         // Error por índice único (si existe)
         if ($conn->errno === 1062) {
-            header("Location: registrar.php?error=cedula_existente");
+            header("Location: registrar?error=cedula_existente");
         } else {
-            header("Location: registrar.php?error=1");
+            header("Location: registrar?error=1");
         }
     }
 

@@ -4,7 +4,7 @@ require_once 'conexion.php';
 
 // Asegurarse de que el usuario sea admin
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
-    header("Location: index.php");
+    header("Location: index");
     exit;
 }
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Validar campos obligatorios
     if ($nombre_usuario === '' || $password === '' || $rol === '') {
-        echo '<script>alert("Todos los campos son obligatorios."); window.location.href = "crear_usuario.php";</script>';
+        echo '<script>alert("Todos los campos son obligatorios."); window.location.href = "crear_usuario";</script>';
         exit;
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        echo '<script>alert("El nombre de usuario ya está en uso."); window.location.href = "crear_usuario.php";</script>';
+        echo '<script>alert("El nombre de usuario ya está en uso."); window.location.href = "crear_usuario";</script>';
         exit;
     }
 
@@ -41,9 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("sss", $nombre_usuario, $password_hash, $rol);
 
     if ($stmt->execute()) {
-        echo '<script>alert("✅ Usuario creado exitosamente."); window.location.href = "index.php";</script>';
+        echo '<script>alert("✅ Usuario creado exitosamente."); window.location.href = "index";</script>';
     } else {
-        echo '<script>alert("❌ Hubo un error al crear el usuario."); window.location.href = "crear_usuario.php";</script>';
+        echo '<script>alert("❌ Hubo un error al crear el usuario."); window.location.href = "crear_usuario";</script>';
     }
 }
 ?>

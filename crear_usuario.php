@@ -66,7 +66,7 @@ require_once 'conexion.php';
     <div class="container-custom">
         <h2 class="text-center">👤 Crear Usuario</h2>
         
-        <form action="crear_usuario_proceso.php" method="POST" autocomplete="off">
+        <form action="crear_usuario_proceso" method="POST" autocomplete="off">
             
             <?php if (isset($_SESSION['mensaje'])): ?>
             <div class="modal fade" id="mensajeModal" tabindex="-1" aria-hidden="true">

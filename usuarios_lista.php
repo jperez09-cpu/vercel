@@ -1,12 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit();
 }
 
 if (!isset($_SESSION['usuario']) || !in_array($_SESSION['rol'], ['admin','concejal'])) {
-    header('Location: index.php');
+    header('Location: index');
     exit;
 }
 
@@ -191,7 +191,7 @@ h2 { color:#0033b3; font-weight:600; margin-bottom:20px; }
     <div class="ms-auto d-flex gap-2 flex-wrap botones-form">
         <button type="submit" class="btn btn-primary">🔍 Buscar</button>
         <a href="index" class="btn btn-secondary">🏠 Volver</a>
-        <a href="dirigentes_csv.php?buscar=<?= urlencode($buscar) ?>&f_concejal=<?= urlencode($f_concejal) ?>" class="btn btn-success">📥 Excel</a>
+        <a href="dirigentes_csv?buscar=<?= urlencode($buscar) ?>&f_concejal=<?= urlencode($f_concejal) ?>" class="btn btn-success">📥 Excel</a>
     </div>
 </form>
 
@@ -226,7 +226,7 @@ h2 { color:#0033b3; font-weight:600; margin-bottom:20px; }
     <td><?= htmlspecialchars($row['telefono'] ?? 'N/A') ?></td>
     <td class="text-center">
         <div class="d-grid gap-1 d-md-flex justify-content-md-center">
-            <a href="editar_usuario.php?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm px-3">✏️ Editar</a>
+            <a href="editar_usuario?id=<?= $row['id'] ?>" class="btn btn-warning btn-sm px-3">✏️ Editar</a>
             <button 
                 class="btn btn-danger btn-sm px-3"
                 data-bs-toggle="modal" 
@@ -286,7 +286,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = button.getAttribute('data-usuario');
         modalEliminar.querySelector('#modalNombreUsuario').textContent = nombre;
         modalEliminar.querySelector('#modalUsuario').textContent = usuario;
-        modalEliminar.querySelector('#formEliminarUsuario').action = 'eliminar_usuario.php?id=' + id;
+        modalEliminar.querySelector('#formEliminarUsuario').action = 'eliminar_usuario?id=' + id;
     });
 });
 </script>

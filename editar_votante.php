@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     if ($stmt->execute()) {
-        header("Location: consultar_votantes.php?actualizado=1");
+        header("Location: consultar_votantes?actualizado=1");
         exit;
     } else {
         $error = "Error al actualizar los datos: " . $stmt->error;
@@ -149,7 +149,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
       <div class="col-12 text-center mt-4">
         <button type="submit" class="btn btn-success px-4">💾 Guardar Cambios</button>
-        <a href="consultar_votantes.php" class="btn btn-secondary px-4 ms-2">↩️ Volver</a>
+        <a href="consultar_votantes" class="btn btn-secondary px-4 ms-2">↩️ Volver</a>
       </div>
     </form>
   </div>

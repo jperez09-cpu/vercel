@@ -9,7 +9,7 @@ include 'conexion.php';
 
 $id = intval($_GET['id'] ?? 0);
 if ($id <= 0) {
-    header('Location: usuarios_lista.php');
+    header('Location: usuarios_lista');
     exit;
 }
 
@@ -79,7 +79,7 @@ if ($concejales_result) {
 <div class="container">
     <h2>✏️ Editar Usuario</h2>
 
-    <form action="editar_usuario_proceso.php" method="POST">
+    <form action="editar_usuario_proceso" method="POST">
         <input type="hidden" name="id" value="<?= htmlspecialchars($usuario['id']) ?>">
 
         <div class="mb-3">

@@ -20,6 +20,121 @@
       "source": "/privacidad.php",
       "destination": "/privacidad",
       "permanent": false
+    },
+    {
+      "source": "/assets/manifest.php",
+      "destination": "/manifest",
+      "permanent": false
+    },
+    {
+      "source": "/registrar.php",
+      "destination": "/registrar",
+      "permanent": false
+    },
+    {
+      "source": "/registrar_votante.php",
+      "destination": "/registrar_votante",
+      "permanent": false
+    },
+    {
+      "source": "/consultar_votantes.php",
+      "destination": "/consultar_votantes",
+      "permanent": false
+    },
+    {
+      "source": "/editar_votante.php",
+      "destination": "/editar_votante",
+      "permanent": false
+    },
+    {
+      "source": "/eliminar_votante.php",
+      "destination": "/eliminar_votante",
+      "permanent": false
+    },
+    {
+      "source": "/crear_usuario.php",
+      "destination": "/crear_usuario",
+      "permanent": false
+    },
+    {
+      "source": "/crear_usuario_proceso.php",
+      "destination": "/crear_usuario_proceso",
+      "permanent": false
+    },
+    {
+      "source": "/usuarios_lista.php",
+      "destination": "/usuarios_lista",
+      "permanent": false
+    },
+    {
+      "source": "/editar_usuario.php",
+      "destination": "/editar_usuario",
+      "permanent": false
+    },
+    {
+      "source": "/editar_usuario_proceso.php",
+      "destination": "/editar_usuario_proceso",
+      "permanent": false
+    },
+    {
+      "source": "/eliminar_usuario.php",
+      "destination": "/eliminar_usuario",
+      "permanent": false
+    },
+    {
+      "source": "/exportar_votantes.php",
+      "destination": "/exportar_votantes",
+      "permanent": false
+    },
+    {
+      "source": "/exportar_csv.php",
+      "destination": "/exportar_csv",
+      "permanent": false
+    },
+    {
+      "source": "/exportar_pdf.php",
+      "destination": "/exportar_pdf",
+      "permanent": false
+    },
+    {
+      "source": "/exportar_pdf_planilla.php",
+      "destination": "/exportar_pdf_planilla",
+      "permanent": false
+    },
+    {
+      "source": "/dirigentes_csv.php",
+      "destination": "/dirigentes_csv",
+      "permanent": false
+    },
+    {
+      "source": "/logout.php",
+      "destination": "/logout",
+      "permanent": false
+    },
+    {
+      "source": "/ajax_usuarios_por_concejal.php",
+      "destination": "/ajax_usuarios_por_concejal",
+      "permanent": false
+    },
+    {
+      "source": "/buscar_padron.php",
+      "destination": "/buscar_padron",
+      "permanent": false
+    },
+    {
+      "source": "/dia_d.php",
+      "destination": "/dia_d",
+      "permanent": false
+    },
+    {
+      "source": "/control_dia_d.php",
+      "destination": "/control_dia_d",
+      "permanent": false
+    },
+    {
+      "source": "/inicializar_dia_d.php",
+      "destination": "/inicializar_dia_d",
+      "permanent": false
     }
   ],
   "rewrites": [

@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 session_start();
 // Verificamos sesión (Asegúrate de que 'usuario' esté definido en el login)
 if (!isset($_SESSION['usuario'])) {
-    header("Location: index.php");
+    header("Location: index");
     exit;
 }
 ?>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['usuario'])) {
             <p class="text-muted">Consulte la cédula para autocompletar datos</p>
         </header>
 
-        <form action="registrar_votante.php" method="POST" class="row g-3" id="formVotante">
+        <form action="registrar_votante" method="POST" class="row g-3" id="formVotante">
             
             <div class="col-md-6">
                 <label class="form-label fw-bold">Cédula</label>
@@ -152,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
         spinner.style.display = "inline-block";
         btnTexto.innerText = " Buscando...";
 
-        fetch(`buscar_padron.php?cedula=${cedula}`)
+        fetch(`buscar_padron?cedula=${cedula}`)
             .then(response => response.json())
             .then(data => {
                 btnBuscar.disabled = false;

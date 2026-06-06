@@ -7,7 +7,7 @@ session_start();
 require_once 'conexion.php';
 
 if (!isset($_SESSION['usuario_id'])) {
-    header('Location: login.php');
+    header('Location: login');
     exit;
 }
 
@@ -138,10 +138,10 @@ h2 {
 </form>
 
 <div class="d-flex gap-2 flex-wrap justify-content-center mt-3">
-    <a href="exportar_csv.php?action=csv&<?= http_build_query($_GET) ?>" class="btn btn-success">Exportar Excel</a>
-    <a href="exportar_pdf.php?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-danger">Exportar PDF</a>
+    <a href="exportar_csv?action=csv&<?= http_build_query($_GET) ?>" class="btn btn-success">Exportar Excel</a>
+    <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-danger">Exportar PDF</a>
     <?php if ($puedeExportarPlanilla): ?>
-        <a href="exportar_pdf_planilla.php?action=pdf_planilla&<?= http_build_query($_GET) ?>" class="btn btn-dark">Planilla PDF</a>
+        <a href="exportar_pdf_planilla?action=pdf_planilla&<?= http_build_query($_GET) ?>" class="btn btn-dark">Planilla PDF</a>
     <?php endif; ?>
 </div>
 
@@ -156,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function cargarUsuarios(idConcejal) {
         if (!selectUsuario) return;
         selectUsuario.innerHTML = '<option value="">Cargando...</option>';
-        fetch(`ajax_usuarios_por_concejal.php?id_concejal=${idConcejal}`)
+        fetch(`ajax_usuarios_por_concejal?id_concejal=${idConcejal}`)
             .then(resp => resp.json())
             .then(data => {
                 selectUsuario.innerHTML = '<option value="">-- Todos los usuarios --</option>';

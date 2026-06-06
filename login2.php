@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (password_verify($password, $usuario['password'])) {
             $_SESSION['usuario'] = $usuario['nombre_usuario'];
             $_SESSION['rol'] = $usuario['rol'];
-            header("Location: consultar_votantes.php");
+            header("Location: consultar_votantes");
             exit;
         } else {
             $error = "Contraseña incorrecta.";

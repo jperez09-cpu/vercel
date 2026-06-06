@@ -26,6 +26,6 @@
     
     <hr>
     <p><small>Última actualización: Abril 2026</small></p>
-    <a href="login.php">Volver al inicio</a>
+    <a href="login">Volver al inicio</a>
 </body>
 </html>

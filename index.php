@@ -55,7 +55,7 @@ $menu_actual = $menu[$rol] ?? $menu['usuario'];
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="manifest" href="assets/manifest.php" type="application/manifest+json">
+  <link rel="manifest" href="/manifest" type="application/manifest+json">
   <meta name="theme-color" content="#1976d2">
   <title>PLRA JAS</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">

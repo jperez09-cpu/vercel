@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
+    header("Location: login");
     exit();
 }
 
@@ -48,14 +48,14 @@ $result = $conn->query($query);
             <td><?php echo $row['apellido']; ?></td>
             <td><?php echo $row['cedula']; ?></td>
             <td>
-              <a href="editar_votante.php?id=<?php echo $row['id']; ?>" class="btn btn-warning">Editar</a>
-              <a href="eliminar_votante.php?id=<?php echo $row['id']; ?>" class="btn btn-danger">Eliminar</a>
+              <a href="editar_votante?id=<?php echo $row['id']; ?>" class="btn btn-warning">Editar</a>
+              <a href="eliminar_votante?id=<?php echo $row['id']; ?>" class="btn btn-danger">Eliminar</a>
             </td>
           </tr>
         <?php endwhile; ?>
       </tbody>
     </table>
-    <a href="logout.php" class="btn btn-danger">Cerrar sesión</a>
+    <a href="logout" class="btn btn-danger">Cerrar sesión</a>
   </div>
 </body>
 </html>

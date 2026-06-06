@@ -4,7 +4,7 @@ session_start();
 if (!isset($_SESSION['usuario']) ||
     !in_array($_SESSION['rol'], ['admin', 'concejal'])
 ) {
-    header('Location: index.php');
+    header('Location: index');
     exit;
 }
 
@@ -22,7 +22,7 @@ $stmt->bind_param("i", $id);
 
 if ($stmt->execute()) {
     // Redirigir de vuelta con mensaje de éxito
-    header("Location: usuarios_lista.php?msg=Usuario+eliminado+correctamente");
+    header("Location: usuarios_lista?msg=Usuario+eliminado+correctamente");
 } else {
     echo "Error al eliminar usuario.";
 }

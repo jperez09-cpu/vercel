@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     setcookie("recordarme", $usuario['id'], time() + (86400 * 30), "/", "", isset($_SERVER['HTTPS']), true);
                 }
 
-                header("Location: index.php");
+                header("Location: index");
                 exit;
             } else {
                 // Incrementar intentos fallidos

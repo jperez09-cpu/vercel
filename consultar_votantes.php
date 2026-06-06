@@ -7,7 +7,7 @@ session_start();
 require_once 'conexion.php';
 
 if (!isset($_SESSION['usuario_id'])) {
-    header('Location: login.php');
+    header('Location: login');
     exit;
 }
 
@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
         selectConcejal.addEventListener('change', function() {
             const id = this.value;
             selectUsuario.innerHTML = '<option value="">Cargando...</option>';
-            fetch(`ajax_usuarios_por_concejal.php?id_concejal=${id}`)
+            fetch(`ajax_usuarios_por_concejal?id_concejal=${id}`)
                 .then(r => r.json())
                 .then(data => {
                     selectUsuario.innerHTML = '<option value="">-- Dirigentes --</option>';
@@ -285,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = btn.dataset.id;
         document.getElementById('elNombre').textContent = btn.dataset.nombre;
         document.getElementById('elCedula').textContent = btn.dataset.cedula;
-        document.getElementById('formEliminar').action = 'eliminar_votante.php?id=' + id;
+        document.getElementById('formEliminar').action = 'eliminar_votante?id=' + id;
     });
 });
 </script>

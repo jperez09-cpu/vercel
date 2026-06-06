@@ -28,5 +28,5 @@ if (!$stmt->execute()) {
     die("Error al ejecutar: " . $stmt->error);
 }
 
-header("Location: usuarios_lista.php");
+header("Location: usuarios_lista");
 exit;
