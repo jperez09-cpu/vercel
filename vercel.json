@@ -92,6 +92,11 @@
       "permanent": false
     },
     {
+      "source": "/exportar_excel.php",
+      "destination": "/exportar_excel",
+      "permanent": false
+    },
+    {
       "source": "/exportar_pdf.php",
       "destination": "/exportar_pdf",
       "permanent": false
