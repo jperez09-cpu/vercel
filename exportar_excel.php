@@ -2,13 +2,9 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-require 'PhpSpreadsheet/vendor/autoload.php';
 require 'conexion.php';
 require_once 'sesion.php';
 iniciarSesionSegura();
-
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login');
@@ -98,7 +94,19 @@ if ($tipos !== '') {
 $stmt->execute();
 $result = $stmt->get_result();
 
-$spreadsheet = new Spreadsheet();
+$filas = [];
+while ($row = $result->fetch_assoc()) {
+    $filas[] = $row;
+}
+
+$autoload = __DIR__ . '/PhpSpreadsheet/vendor/autoload.php';
+if (!is_file($autoload)) {
+    exportarExcelHtml($filas);
+}
+
+require $autoload;
+
+$spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sheet->setTitle('Votantes');
 
@@ -122,7 +130,7 @@ $sheet->getRowDimension(1)->setRowHeight(28);
 
 $rowNum = 2;
 $nro = 1;
-while ($row = $result->fetch_assoc()) {
+foreach ($filas as $row) {
     $sheet->setCellValue("A$rowNum", $nro++);
     $sheet->setCellValue("B$rowNum", $row['nombre']);
     $sheet->setCellValue("C$rowNum", $row['apellido']);
@@ -203,7 +211,73 @@ header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetm
 header('Content-Disposition: attachment; filename="reporte_votantes.xlsx"');
 header('Cache-Control: max-age=0');
 
-$writer = new Xlsx($spreadsheet);
+$writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
 $writer->save('php://output');
 exit;
-?>
+
+function exportarExcelHtml(array $filas): void
+{
+    header('Content-Type: application/vnd.ms-excel; charset=UTF-8');
+    header('Content-Disposition: attachment; filename="reporte_votantes.xls"');
+    header('Cache-Control: max-age=0');
+
+    echo "\xEF\xBB\xBF";
+    echo '<!DOCTYPE html><html><head><meta charset="UTF-8">';
+    echo '<style>
+        @page { size: A4 landscape; margin: 0.35in 0.25in; }
+        body { font-family: Arial, sans-serif; font-size: 10px; }
+        table { border-collapse: collapse; width: 100%; table-layout: fixed; }
+        th { background: #4F81BD; color: #fff; font-weight: bold; text-align: center; vertical-align: middle; }
+        td, th { border: 1px solid #b7b7b7; padding: 4px; vertical-align: top; white-space: normal; }
+        .center { text-align: center; }
+        .text { mso-number-format:"\@"; }
+        .total { background: #D9EAF7; font-weight: bold; }
+        .nro { width: 35px; }
+        .nombre, .apellido { width: 100px; }
+        .cedula { width: 70px; }
+        .telefono { width: 80px; }
+        .barrio { width: 130px; }
+        .zona { width: 100px; }
+        .local { width: 150px; }
+        .mesa { width: 50px; }
+        .usuario { width: 150px; }
+        .concejal { width: 120px; }
+        .fecha { width: 95px; }
+    </style>';
+    echo '</head><body>';
+    echo '<table>';
+    echo '<thead><tr>';
+    $headers = ['Nro', 'Nombre', 'Apellido', 'Cedula', 'Telefono', 'Barrio', 'Zona', 'Local', 'Mesa', 'Usuario', 'Concejal', 'Fecha Registro'];
+    $classes = ['nro', 'nombre', 'apellido', 'cedula', 'telefono', 'barrio', 'zona', 'local', 'mesa', 'usuario', 'concejal', 'fecha'];
+    foreach ($headers as $i => $header) {
+        echo '<th class="' . $classes[$i] . '">' . h($header) . '</th>';
+    }
+    echo '</tr></thead><tbody>';
+
+    $nro = 1;
+    foreach ($filas as $row) {
+        echo '<tr>';
+        echo '<td class="center">' . $nro++ . '</td>';
+        echo '<td>' . h($row['nombre']) . '</td>';
+        echo '<td>' . h($row['apellido']) . '</td>';
+        echo '<td class="center text">' . h($row['cedula']) . '</td>';
+        echo '<td class="center text">' . h($row['telefono']) . '</td>';
+        echo '<td>' . h($row['barrio']) . '</td>';
+        echo '<td>' . h($row['zona']) . '</td>';
+        echo '<td>' . h($row['local']) . '</td>';
+        echo '<td class="center">' . h($row['mesa']) . '</td>';
+        echo '<td>' . h($row['usuario']) . '</td>';
+        echo '<td>' . h($row['concejal']) . '</td>';
+        echo '<td class="center">' . h($row['fecha_registro']) . '</td>';
+        echo '</tr>';
+    }
+
+    echo '<tr class="total"><td colspan="11">TOTAL DE VOTANTES</td><td class="center">' . count($filas) . '</td></tr>';
+    echo '</tbody></table></body></html>';
+    exit;
+}
+
+function h($valor): string
+{
+    return htmlspecialchars((string) ($valor ?? ''), ENT_QUOTES, 'UTF-8');
+}
