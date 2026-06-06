@@ -807,7 +807,7 @@ $actualizado = date('H:i:s');
             <div class="alert alert-<?= htmlspecialchars($tipoMensajeAccion) ?>"><?= htmlspecialchars($mensajeAccion) ?></div>
         <?php endif; ?>
 
-        <section class="filter-panel p-4 mb-4">
+        <!--<section class="filter-panel p-4 mb-4">
             <div class="d-flex justify-content-between align-items-center gap-3 flex-wrap">
                 <div>
                     <div class="text-muted small mb-1">Marcacion publica del Dia D</div>
@@ -827,7 +827,7 @@ $actualizado = date('H:i:s');
                     <button type="submit" class="btn btn-outline-primary">Sincronizar votos externos</button>
                 </form>
             </div>
-        </section>
+        </section> -->
 
         <?php if ($alertaConfiguracion !== ''): ?>
             <div class="alert alert-warning d-flex justify-content-between align-items-center flex-wrap gap-2">
