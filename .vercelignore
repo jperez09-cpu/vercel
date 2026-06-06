@@ -1,0 +1,13 @@
+.git
+.env
+.env.local
+backups
+*.sql
+*.sql.gz
+*.zip
+BACKUP_BASE_DATOS.md
+VERCEL_DEPLOY.md
+backup_database.php
+fpdf/tutorial
+fpdf/makefont
+files for your website should be uploaded here!

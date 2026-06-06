@@ -1,0 +1,32 @@
+RewriteEngine On
+
+# 1. SEGURIDAD: Impedir que se listen archivos de las carpetas
+Options -Indexes
+
+# 2. SEGURIDAD: Bloquear acceso a archivos sensibles (incluyendo tu conexion.php)
+<FilesMatch "\.(inc|ini|log|conf|sql|json|bak|txt)$">
+    Order deny,allow
+    Deny from all
+    # Permitir excepciones necesarias para el funcionamiento
+    <Files "manifest_reg.json">
+        Allow from all
+    </Files>
+    <Files "privacidad.txt">
+        Allow from all
+    </Files>
+</FilesMatch>
+
+# 3. SEGURIDAD: Bloquear acceso directo a conexion.php
+<Files "conexion.php">
+    Order deny,allow
+    Deny from all
+</Files>
+
+# 4. FUNCIONALIDAD: Quitar .php de la URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^/]+)/?$ $1.php [L]
+
+# 5. COMPATIBILIDAD: Tipos de archivo
+AddType application/manifest+json .json
+AddType application/manifest+json .php
