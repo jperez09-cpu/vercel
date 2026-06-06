@@ -1,28 +1,26 @@
 <?php
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
+ini_set('display_errors', '1');
+ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
 $root = dirname(__DIR__);
 $requestMethod = $_SERVER['REQUEST_METHOD'] ?? 'GET';
 $error = '';
-
-header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-header('Pragma: no-cache');
+$usuarioIngresado = '';
 
 if ($requestMethod === 'POST') {
     require_once $root . '/sesion.php';
     require_once $root . '/conexion.php';
 
-    $nombre_usuario = trim($_POST['nombre_usuario'] ?? '');
+    $usuarioIngresado = trim($_POST['nombre_usuario'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    if ($nombre_usuario === '' || $password === '') {
+    if ($usuarioIngresado === '' || $password === '') {
         $error = 'Por favor, completa todos los campos.';
     } else {
         $stmt = $conn->prepare('SELECT * FROM usuarios WHERE nombre_usuario = ? LIMIT 1');
-        $stmt->bind_param('s', $nombre_usuario);
+        $stmt->bind_param('s', $usuarioIngresado);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -46,7 +44,16 @@ if ($requestMethod === 'POST') {
         $error = 'Usuario o contrasena incorrectos.';
     }
 }
-?>
+
+$alerta = '';
+if ($error !== '') {
+    $mensaje = htmlspecialchars($error, ENT_QUOTES, 'UTF-8');
+    $alerta = '<div class="alert alert-danger py-2" style="font-size: 0.9rem;">' . $mensaje . '</div>';
+}
+
+$valorUsuario = htmlspecialchars($usuarioIngresado, ENT_QUOTES, 'UTF-8');
+
+echo <<<HTML
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -85,7 +92,7 @@ if ($requestMethod === 'POST') {
   </style>
 </head>
 <body>
-  <form action="/login.php" method="POST" class="login-container" novalidate autocomplete="off">
+  <form action="/api/login.php" method="POST" class="login-container" novalidate autocomplete="off">
     <div class="text-center mb-4">
         <h2 class="h4 mb-1">J. Augusto Saldivar</h2>
         <p class="text-muted">Administracion de Contactos Barriales</p>
@@ -93,13 +100,11 @@ if ($requestMethod === 'POST') {
         <h5 class="mt-3">Iniciar Sesion</h5>
     </div>
 
-    <?php if ($error !== ''): ?>
-      <div class="alert alert-danger py-2" style="font-size: 0.9rem;"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+    $alerta
 
     <div class="mb-3">
       <label for="nombre_usuario" class="form-label">Usuario</label>
-      <input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control" required value="<?= htmlspecialchars($_POST['nombre_usuario'] ?? '') ?>">
+      <input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control" required value="$valorUsuario">
     </div>
 
     <div class="mb-4">
@@ -116,12 +121,6 @@ if ($requestMethod === 'POST') {
         <a href="/privacidad.php" style="color: #0d6efd; text-decoration: none;">Politica de Privacidad</a>
     </p>
   </footer>
-<script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.getRegistrations()
-    .then(registrations => registrations.forEach(registration => registration.unregister()))
-    .catch(() => {});
-}
-</script>
 </body>
 </html>
+HTML;
