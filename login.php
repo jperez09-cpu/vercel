@@ -93,7 +93,7 @@ if ($requestMethod === 'POST') {
 </head>
 <body>
 
-  <form action="/login.php" method="POST" class="login-container" novalidate autocomplete="off">
+  <form action="/login" method="POST" class="login-container" novalidate autocomplete="off">
     <div class="text-center mb-4">
         <h2 class="h4 mb-1">J. Augusto Saldivar</h2>
         <p class="text-muted">Administracion de Contactos Barriales</p>
