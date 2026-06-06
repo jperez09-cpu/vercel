@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 if (!isset($_SESSION['usuario']) || $_SESSION['rol'] !== 'admin') {
     header('Location: index');
     exit;

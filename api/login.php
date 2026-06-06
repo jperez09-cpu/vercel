@@ -28,13 +28,7 @@ if ($requestMethod === 'POST') {
             $usuario = $result->fetch_assoc();
 
             if (password_verify($password, $usuario['password'])) {
-                iniciarSesionSegura();
-
-                $_SESSION['usuario_id'] = $usuario['id'];
-                $_SESSION['usuario'] = $usuario['nombre_usuario'];
-                $_SESSION['nombre_usuario'] = $usuario['nombre_completo'];
-                $_SESSION['rol'] = $usuario['rol'];
-                $_SESSION['user_agent'] = $_SERVER['HTTP_USER_AGENT'] ?? '';
+                iniciarSesionUsuario($usuario);
 
                 header('Location: /index');
                 exit;

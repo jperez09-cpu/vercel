@@ -4,7 +4,8 @@ error_reporting(E_ALL);
 
 require 'PhpSpreadsheet/vendor/autoload.php';
 require 'conexion.php';
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;

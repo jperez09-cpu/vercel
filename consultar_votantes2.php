@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario'])) {

@@ -4,7 +4,8 @@ ob_start();
 
 require 'fpdf/fpdf.php';
 require 'conexion.php';
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login');

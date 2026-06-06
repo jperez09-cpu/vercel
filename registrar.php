@@ -3,7 +3,8 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 // Verificamos sesión (Asegúrate de que 'usuario' esté definido en el login)
 if (!isset($_SESSION['usuario'])) {
     header("Location: index");

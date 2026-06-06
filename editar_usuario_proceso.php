@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 if (!isset($_SESSION['usuario_id']) || !in_array($_SESSION['rol'], ['admin', 'concejal'])) {
     header('Location: login');
     exit;

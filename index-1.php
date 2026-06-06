@@ -1,5 +1,6 @@
 <?php
-session_start();
+require_once 'sesion.php';
+iniciarSesionSegura();
 require_once 'conexion.php';
 
 // Generar token CSRF si no existe
