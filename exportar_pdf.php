@@ -1,9 +1,13 @@
 <?php
 
 ob_start();
+ini_set('display_errors', '0');
+ini_set('display_startup_errors', '0');
+ini_set('log_errors', '1');
+error_reporting(E_ALL);
 
-require 'fpdf/fpdf.php';
-require 'conexion.php';
+require __DIR__ . '/fpdf/fpdf.php';
+require __DIR__ . '/conexion.php';
 require_once 'sesion.php';
 iniciarSesionSegura();
 
@@ -104,7 +108,10 @@ class PDF extends FPDF
 {
     function Header()
     {
-        $this->Image('assets/logo_PLRA.png', 10, 8, 18);
+        $logo = __DIR__ . '/assets/logo_PLRA.png';
+        if (is_file($logo)) {
+            $this->Image($logo, 10, 8, 18);
+        }
 
         $this->SetFont('Arial', 'B', 15);
         $this->Cell(0, 8, utf8_decode('PLRA - Sistema de Gestion de Votantes'), 0, 1, 'C');
@@ -139,17 +146,18 @@ class PDF extends FPDF
 
 $pdf = new PDF('L', 'mm', 'A4');
 $pdf->AliasNbPages();
+$pdf->SetAutoPageBreak(true, 15);
 $pdf->AddPage();
 $pdf->SetFont('Arial', '', 9);
 
 foreach ($votantes as $row) {
-    $pdf->Cell(35, 6, utf8_decode($row['nombre']), 1);
-    $pdf->Cell(35, 6, utf8_decode($row['apellido']), 1);
-    $pdf->Cell(24, 6, $row['cedula'], 1);
-    $pdf->Cell(28, 6, $row['telefono'], 1);
-    $pdf->Cell(45, 6, utf8_decode($row['barrio']), 1);
-    $pdf->Cell(15, 6, $row['zona'], 1);
-    $pdf->Cell(55, 6, utf8_decode((string) ($row['local'] ?? '')), 1);
+    $pdf->Cell(35, 6, textoPdf($row['nombre'] ?? ''), 1);
+    $pdf->Cell(35, 6, textoPdf($row['apellido'] ?? ''), 1);
+    $pdf->Cell(24, 6, textoPdf($row['cedula'] ?? ''), 1);
+    $pdf->Cell(28, 6, textoPdf($row['telefono'] ?? ''), 1);
+    $pdf->Cell(45, 6, textoPdf($row['barrio'] ?? ''), 1);
+    $pdf->Cell(15, 6, textoPdf($row['zona'] ?? ''), 1);
+    $pdf->Cell(55, 6, textoPdf($row['local'] ?? ''), 1);
     $pdf->Cell(15, 6, (string) ($row['mesa'] ?? ''), 1);
     $pdf->Ln();
 }
@@ -158,9 +166,17 @@ $pdf->Ln(5);
 $pdf->SetFont('Arial', 'B', 11);
 $pdf->Cell(0, 8, 'Total de votantes: ' . count($votantes), 0, 1, 'R');
 
-header('Content-Type: application/pdf');
-header('Content-Disposition: attachment; filename="reporte_votantes.pdf"');
+while (ob_get_level() > 0) {
+    ob_end_clean();
+}
 
 $pdf->Output('D', 'reporte_votantes.pdf');
 exit;
-?>
+
+function textoPdf($valor): string
+{
+    $texto = (string) ($valor ?? '');
+    return function_exists('iconv')
+        ? (iconv('UTF-8', 'ISO-8859-1//TRANSLIT', $texto) ?: '')
+        : utf8_decode($texto);
+}
