@@ -61,7 +61,6 @@ if ($rol === 'admin') {
 $search = $_GET['buscar'] ?? '';
 $fil_usuario = $_GET['f_usuario'] ?? '';
 $fil_concejal = $_GET['f_concejal'] ?? '';
-$puedeExportarPlanilla = $rol === 'admin' || ($rol === 'concejal' && $concejal_id_logueado === 4);
 ?>
 
 <!DOCTYPE html>
@@ -141,9 +140,12 @@ h2 {
 <div class="d-flex gap-2 flex-wrap justify-content-center mt-3">
     <a href="exportar_excel?action=xlsx&<?= http_build_query($_GET) ?>" class="btn btn-success">Exportar Excel</a>
     <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-danger">Exportar PDF</a>
+
+=======
     <?php if ($puedeExportarPlanilla): ?>
         <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-dark">Planilla PDF</a>
     <?php endif; ?>
+
 </div>
 
 </main>
