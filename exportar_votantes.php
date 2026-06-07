@@ -141,10 +141,6 @@ h2 {
     <a href="exportar_excel?action=xlsx&<?= http_build_query($_GET) ?>" class="btn btn-success">Exportar Excel</a>
     <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-danger">Exportar PDF</a>
 
-=======
-    <?php if ($puedeExportarPlanilla): ?>
-        <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-dark">Planilla PDF</a>
-    <?php endif; ?>
 
 </div>
 
