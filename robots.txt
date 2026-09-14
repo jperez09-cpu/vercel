@@ -1,0 +1,14 @@
+User-agent: *
+Disallow: /login.php
+Disallow: /admin/
+Disallow: /config/
+Disallow: /conexion.php
+Disallow: /assets/
+Disallow: /asset/
+Disallow: /db/
+
+# Evita que cualquier buscador indexe el sitio completo si es privado
+Disallow: /
+
+# Opcional: Indica dónde NO está el sitemap
+Noindex: /
