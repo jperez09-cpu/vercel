@@ -2,7 +2,8 @@
 
 $host = getenv('DB_HOST');
 $user = getenv('DB_USER');
-$pass = getenv('DB_PASS');
+// Acepta el nombre actual y el anterior para evitar perder la conexión al migrar.
+$pass = getenv('DB_PASSWORD') ?: getenv('DB_PASS');
 $db = getenv('DB_NAME');
 $port = getenv('DB_PORT') ?: '10498';
 

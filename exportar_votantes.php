@@ -140,8 +140,6 @@ h2 {
 <div class="d-flex gap-2 flex-wrap justify-content-center mt-3">
     <a href="exportar_excel?action=xlsx&<?= http_build_query($_GET) ?>" class="btn btn-success">Exportar Excel</a>
     <a href="exportar_pdf?action=pdf&<?= http_build_query($_GET) ?>" class="btn btn-danger">Exportar PDF</a>
-
-
 </div>
 
 </main>

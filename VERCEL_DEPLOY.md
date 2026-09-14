@@ -14,7 +14,7 @@ Configura estas variables en `Project Settings > Environment Variables`:
 ```text
 DB_HOST
 DB_USER
-DB_PASS
+DB_PASSWORD
 DB_NAME
 DB_PORT
 ```

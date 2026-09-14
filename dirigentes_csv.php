@@ -87,11 +87,19 @@ table { border-collapse: collapse; width: 100%; }
 th, td { border: 1px solid #000; padding: 6px; vertical-align: top; }
 th { background: #d9eaf7; font-weight: bold; text-align: center; }
 .titulo { border: 0; font-size: 16pt; font-weight: bold; text-align: center; padding: 10px; }
-.texto { mso-number-format: "\\@"; }
+.texto { mso-number-format: "\@"; white-space: nowrap; }
 </style>
 </head>
 <body>
 <table>
+<colgroup>
+    <col style="width: 30%;">
+    <col style="width: 14%;">
+    <col style="width: 16%;">
+    <col style="width: 16%;">
+    <col style="width: 10%;">
+    <col style="width: 14%;">
+</colgroup>
 <tr><td class="titulo" colspan="6">PLANILLA DE DIRIGENTES</td></tr>
 <tr>
     <th>Nombre</th><th>Cedula</th><th>Telefono</th>
